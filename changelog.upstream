@@ -1,3 +1,37 @@
+commit 2de610e55e918507d7b416477f479c2ec621ee9a
+Merge: 104d9c2 5dd2636
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jun 24 14:01:32 2026 -0400
+
+    Merge remote-tracking branch 'refs/remotes/ArrayBolt3/arraybolt3/trixie'
+
+commit 5dd2636621cf542e1b8291b0daca1c949be149a1
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Wed Jun 24 00:36:50 2026 -0400
+
+    Minor polish on sysmaint-session-startup patch
+
+commit e6c6823e00b92227cfaa7d81dce0c5684259ffeb
+Merge: 104d9c2 14c60dd
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Wed Jun 24 00:14:18 2026 -0400
+
+    Merge remote-tracking branch 'eternitty/labwc-startup' into arraybolt3/trixie
+
+commit 14c60dddf06ed67709f0c1770dc58c1b34c6eac9
+Author: eterniTTY <a0klnj23@anonaddy.me>
+Date:   Tue Jun 23 23:16:33 2026 +0000
+
+    Add startup helper script and use labwc --startup.
+
+    https://forums.kicksecure.com/t/system-maintenance-panel-not-showing-up/1603/17
+
+commit 104d9c234e3ac0ffb19463cd07f094d2534419a3
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jun 10 17:50:28 2026 +0000
+
+    bumped changelog version
+
 commit d52ba8e613628562b655bb199618a632f1f4e46f
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed Jun 10 13:44:43 2026 -0400
