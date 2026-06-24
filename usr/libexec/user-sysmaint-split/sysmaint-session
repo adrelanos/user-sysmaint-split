@@ -56,5 +56,4 @@ light_sleep 1
 "${selected_sysmaint_app}" &
 sysmaint_app_pid="$!"
 
-
 wait "${sysmaint_app_pid}"
