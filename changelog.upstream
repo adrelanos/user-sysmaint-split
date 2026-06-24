@@ -1,3 +1,16 @@
+commit 55d9860ebf9aaf9a5a51a47e0b639c4bcec69866
+Merge: db7bcb3 a2e7ea0
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jun 24 15:03:22 2026 -0400
+
+    Merge remote-tracking branch 'gitlab-adrelanos/master'
+
+commit db7bcb387d85c398d2324c868f77eb322e33f1dd
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jun 24 18:07:37 2026 +0000
+
+    bumped changelog version
+
 commit 2de610e55e918507d7b416477f479c2ec621ee9a
 Merge: 104d9c2 5dd2636
 Author: Patrick Schleizer <adrelanos@whonix.org>
@@ -25,6 +38,36 @@ Date:   Tue Jun 23 23:16:33 2026 +0000
     Add startup helper script and use labwc --startup.
 
     https://forums.kicksecure.com/t/system-maintenance-panel-not-showing-up/1603/17
+
+commit a2e7ea0515a3795eabe7b54effc779e0874fba0f
+Author: claude <noreply@anthropic.com>
+Date:   Mon Jun 22 07:35:49 2026 -0400
+
+    sysmaint-boot-unrestricted-qubes: order before qubes-misc-post.service
+
+    In Qubes unrestricted admin mode, sysmaint-boot-unrestricted-qubes.service
+    self-removes user-sysmaint-split by running 'apt purge' (via sysmaint-boot ->
+    dummy-dependency), which takes /var/lib/dpkg/lock-frontend.
+
+    This had no ordering relative to qubes-misc-post.service, which runs Qubes'
+    /rw/config/rc.local (and /rw/config/rc.local.d/*.rc). When a user rc.local
+    performs its own dpkg/apt operation, the two ran concurrently at boot, raced
+    for the dpkg frontend lock, and the purge aborted:
+
+      E: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process N (dpkg)
+      dummy-dependency: ERROR: 'apt-get-noninteractive' command failed!
+
+    leaving the service failed and user-sysmaint-split not removed.
+
+    Add 'Before=qubes-misc-post.service' so systemd serializes them: the self-purge
+    completes (and releases the lock) before any rc.local dpkg work runs. The unit
+    is already Qubes-gated (ConditionPathExists, ConditionKernelCommandLine), so the
+    ordering only applies where qubes-misc-post.service exists; if it is absent the
+    edge is a harmless no-op. No ordering cycle is introduced (verified via
+    systemd-analyze and a live daemon-reload).
+
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_0195SVW17cagP3bz9mZJvBhL
 
 commit 104d9c234e3ac0ffb19463cd07f094d2534419a3
 Author: Patrick Schleizer <adrelanos@whonix.org>
